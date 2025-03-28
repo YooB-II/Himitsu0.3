@@ -1,0 +1,4 @@
+repository "Himitsu@unity_E7E7EBB15AE7A8C5C0AA@cloud"
+  path "/"
+    br "/main"
+    co "/main"
