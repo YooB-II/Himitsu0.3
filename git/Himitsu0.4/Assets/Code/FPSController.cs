@@ -5,39 +5,41 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class FPSController : MonoBehaviour
 {
-    public Camera playerCamera;
+    [SerializeField] private Camera playerCamera; // เปลี่ยนเป็น private และใช้ SerializeField
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
     public float jumpPower = 7f;
     public float gravity = 10f;
 
-
     public float lookSpeed = 2f;
     public float lookXLimit = 45f;
 
-
-    Vector3 moveDirection = Vector3.zero;
-    float rotationX = 0;
+    private Vector3 moveDirection = Vector3.zero;
+    private float rotationX = 0;
 
     public bool canMove = true;
 
+    private CharacterController characterController;
 
-    CharacterController characterController;
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+
+        if (playerCamera == null)
+        {
+            Debug.LogError("playerCamera ยังไม่ได้ถูกกำหนดใน Inspector!", this);
+        }
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     void Update()
     {
-
-        #region Handles Movment
+        #region Handles Movement
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-        // Press Left Shift to run
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
         float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
         float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
@@ -47,18 +49,20 @@ public class FPSController : MonoBehaviour
         #endregion
 
         #region Handles Jumping
-        if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+        if (characterController.isGrounded)
         {
-            moveDirection.y = jumpPower;
+            if (Input.GetButton("Jump") && canMove)
+            {
+                moveDirection.y = jumpPower;
+            }
+            else
+            {
+                moveDirection.y = 0;
+            }
         }
         else
         {
-            moveDirection.y = movementDirectionY;
-        }
-
-        if (!characterController.isGrounded)
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
+            moveDirection.y = movementDirectionY - (gravity * Time.deltaTime);
         }
 
         #endregion
@@ -66,7 +70,7 @@ public class FPSController : MonoBehaviour
         #region Handles Rotation
         characterController.Move(moveDirection * Time.deltaTime);
 
-        if (canMove)
+        if (canMove && playerCamera != null)
         {
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
