@@ -27,7 +27,7 @@ public class HealthBar : MonoBehaviour
 
         easeHealthBar.value = Mathf.Lerp(easeHealthBar.value, health, lerpSpeed);
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetButtonDown("Fire1"))
         {
             TakeDamage(10);
         }
