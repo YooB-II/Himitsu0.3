@@ -2,16 +2,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float life = 3f;
+    public float lifeTime = 3f;
 
-    void Awake()
+    void Start()
     {
-        Destroy(gameObject, life);
+        Destroy(gameObject, lifeTime); 
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        Destroy(collision.gameObject);
-        Destroy(gameObject);
+        Destroy(gameObject); 
     }
 }

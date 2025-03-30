@@ -2,16 +2,23 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public Transform bulletSpawnPoint;
-    public GameObject bulletPrefab;
-    public float bulletSpeed = 10f;
+    public GameObject bulletPrefab; 
+    public Transform firePoint; 
+    public float bulletSpeed = 20f;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            bullet.GetComponent<Rigidbody>().linearVelocity = bulletSpawnPoint.forward * bulletSpeed;
+            Shoot();
         }
+    }
+
+    void Shoot()
+    {
+        Debug.Log("ยิงกระสุน!"); 
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        rb.linearVelocity = firePoint.forward * bulletSpeed;
     }
 }
