@@ -8,6 +8,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/start.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/bedroom.unity
+    guid: 42fa4072cf98a9b4aaa9b41fad4307c1
+  - enabled: 1
+    path: Assets/Scenes/Talk to the Goddess.unity
+    guid: c795e92c34e081246b54b8a30bd5454a
+  - enabled: 1
+    path: Assets/Scenes/DemoScene.unity
+    guid: cc10df96022b19841ac18003dab61704
+  - enabled: 1
+    path: Assets/Scenes/BossFi.unity
+    guid: a29848c6cbdc245439fd7641ab34b8bc
+  - enabled: 1
+    path: Assets/Scenes/Talk to the Goddess and bey.unity
+    guid: c8ac4001c48291641b60aab46af6911d
+  - enabled: 1
+    path: Assets/Scenes/bedroom 1.unity
+    guid: 30ed3207fee768b42af362414975e664
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: 293189013ef7d914796de83c72940a1e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
