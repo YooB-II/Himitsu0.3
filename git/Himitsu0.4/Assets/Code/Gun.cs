@@ -2,34 +2,34 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public GameObject bulletPrefab; 
-    public Transform firePoint; 
+    public GameObject bulletPrefab;
+    public Transform firePoint;
     public float bulletSpeed = 20f;
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("กดปุ่มยิงแล้ว!"); // เช็คว่ากดปุ่มได้ไหม
+            Debug.Log("Fire button pressed!");
             Shoot();
         }
     }
 
     void Shoot()
     {
-        Debug.Log("สร้างกระสุน!");
+        Debug.Log("Spawning bullet!");
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
         if (bullet == null)
         {
-            Debug.LogError("bulletPrefab เป็น null! ตรวจสอบการตั้งค่าใน Inspector");
+            Debug.LogError("bulletPrefab is null! Check the settings in the Inspector.");
             return;
         }
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb == null)
         {
-            Debug.LogError("ไม่มี Rigidbody บนกระสุน!");
+            Debug.LogError("No Rigidbody found on the bullet!");
             return;
         }
 
